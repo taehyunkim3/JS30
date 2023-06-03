@@ -113,22 +113,20 @@
         <span class="sound">bell</span>
       </div>
     </main>
+    ㄴㄴ
     <audio data-key="65" src="sound/click-button-140881.mp3"></audio>
-    <audio data-key="83" src="/sound/click-button-menu-147349.mp3"></audio>
-    <audio data-key="68" src="/sound/mech-keyboard-02-102918.mp3"></audio>
-    <audio data-key="70" src="/sound/metalic-groan-98230.mp3"></audio>
-    <audio data-key="71" src="/sound/money-bag-82960.mp3"></audio>
-    <audio data-key="72" src="/sound/perc03-44836.mp3"></audio>
-    <audio data-key="74" src="/sound/silver-quarter-4-44684.mp3"></audio>
-    <audio
-      data-key="75"
-      src="/sound/single-quack-from-a-duck-14494.mp3"
-    ></audio>
+    <audio data-key="83" src="sound/click-button-menu-147349.mp3"></audio>
+    <audio data-key="68" src="sound/mech-keyboard-02-102918.mp3"></audio>
+    <audio data-key="70" src="sound/metalic-groan-98230.mp3"></audio>
+    <audio data-key="71" src="sound/money-bag-82960.mp3"></audio>
+    <audio data-key="72" src="sound/perc03-44836.mp3"></audio>
+    <audio data-key="74" src="sound/silver-quarter-4-44684.mp3"></audio>
+    <audio data-key="75" src="sound/single-quack-from-a-duck-14494.mp3"></audio>
     <audio
       data-key="76"
-      src="/sound/tape-machine-button-press-metal-84484.mp3"
+      src="sound/tape-machine-button-press-metal-84484.mp3"
     ></audio>
-    <audio data-key="186" src="/sound/thin-bell-ding-4-83140.mp3"></audio>
+    <audio data-key="186" src="sound/thin-bell-ding-4-83140.mp3"></audio>
 
     <script>
       const keys = document.querySelectorAll(".key");
@@ -145,11 +143,11 @@
         audio.currentTime = 0;
 
         audio.play();
-        // if (key.classList.contains("hit")) {
-        //   key.classList.remove("hit");
-        // } else {
-        //   key.classList.add("hit");
-        // }
+        if (key.classList.contains("hit")) {
+          key.classList.remove("hit");
+        } else {
+          key.classList.add("hit");
+        }
 
         console.log(e.keyCode);
       }
