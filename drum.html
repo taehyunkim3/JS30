@@ -145,7 +145,11 @@
         audio.currentTime = 0;
 
         audio.play();
-        key.classList.add("hit");
+        if (key.classList.contains("playing")) {
+          key.classList.remove("playing");
+        } else {
+          key.classList.add("playing");
+        }
 
         console.log(e.keyCode);
       }
