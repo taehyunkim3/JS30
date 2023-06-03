@@ -145,20 +145,17 @@
         audio.currentTime = 0;
 
         audio.play();
-        if (key.classList.contains("playing")) {
-          key.classList.remove("playing");
-        } else {
-          key.classList.add("playing");
-        }
+        // if (key.classList.contains("hit")) {
+        //   key.classList.remove("hit");
+        // } else {
+        //   key.classList.add("hit");
+        // }
 
         console.log(e.keyCode);
       }
 
       function removeTransition(e) {
         if (e.propertyName !== "transform") return;
-        this.classList.remove("hit");
-      }
-      function removeEffect(e) {
         this.classList.remove("hit");
       }
     </script>
