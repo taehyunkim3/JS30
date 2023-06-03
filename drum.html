@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+    </style>
+
+    <style>
+      * {
+        font-family: "Arvo", serif;
+      }
+      body {
+        margin: 0;
+      }
+
+      .wrapper {
+        height: 100vh;
+        background-size: cover;
+        background-image: url("https://cdn.pixabay.com/photo/2018/05/10/11/34/concert-3387324_1280.jpg");
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: ;
+        align-content: center;
+      }
+      @media (min-width: 915px) {
+        .wrapper {
+          justify-content: space-around;
+        }
+      }
+
+      .key {
+        margin: 20px;
+        height: 50px;
+        width: 50px;
+        border: 2px solid gray;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        transition: all 90ms;
+      }
+
+      .key .kbd {
+        color: white;
+        font-size: 20px;
+      }
+      .key:hover {
+        transform: scale(1.2);
+        box-shadow: 0px 0px 56px 22px rgba(247, 247, 0, 1);
+        border: 4px solid white;
+      }
+
+      .hit {
+        transform: scale(1.2);
+        box-shadow: 0px 0px 56px 22px rgba(247, 247, 0, 1);
+        border: 4px solid white;
+      }
+      .sound {
+        color: yellow;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="wrapper">
+      <div data-key="65" class="key">
+        <span class="kbd">A</span>
+        <span class="sound">click</span>
+      </div>
+      <div data-key="83" class="key">
+        <span class="kbd">S</span>
+        <span class="sound">click2</span>
+      </div>
+      <div data-key="68" class="key">
+        <span class="kbd">D</span>
+        <span class="sound">keyboard</span>
+      </div>
+      <div data-key="70" class="key">
+        <span class="kbd">F</span>
+        <span class="sound">metalic</span>
+      </div>
+      <div data-key="71" class="key">
+        <span class="kbd">G</span>
+        <span class="sound">moneybag</span>
+      </div>
+      <div data-key="72" class="key">
+        <span class="kbd">H</span>
+        <span class="sound">perc</span>
+      </div>
+      <div data-key="74" class="key">
+        <span class="kbd">J</span>
+        <span class="sound">coin</span>
+      </div>
+      <div data-key="75" class="key">
+        <span class="kbd">K</span>
+        <span class="sound">duck</span>
+      </div>
+      <div data-key="76" class="key">
+        <span class="kbd">L</span>
+        <span class="sound">button</span>
+      </div>
+      <div data-key="186" class="key">
+        <span class="kbd">;</span>
+        <span class="sound">bell</span>
+      </div>
+    </main>
+    <audio data-key="65" src="sound/click-button-140881.mp3"></audio>
+    <audio data-key="83" src="/sound/click-button-menu-147349.mp3"></audio>
+    <audio data-key="68" src="/sound/mech-keyboard-02-102918.mp3"></audio>
+    <audio data-key="70" src="/sound/metalic-groan-98230.mp3"></audio>
+    <audio data-key="71" src="/sound/money-bag-82960.mp3"></audio>
+    <audio data-key="72" src="/sound/perc03-44836.mp3"></audio>
+    <audio data-key="74" src="/sound/silver-quarter-4-44684.mp3"></audio>
+    <audio
+      data-key="75"
+      src="/sound/single-quack-from-a-duck-14494.mp3"
+    ></audio>
+    <audio
+      data-key="76"
+      src="/sound/tape-machine-button-press-metal-84484.mp3"
+    ></audio>
+    <audio data-key="186" src="/sound/thin-bell-ding-4-83140.mp3"></audio>
+
+    <script>
+      const keys = document.querySelectorAll(".key");
+      keys.forEach((key) => {
+        key.addEventListener("transitionend", removeTransition);
+      });
+
+      window.addEventListener("keydown", playSound);
+
+      function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return;
+        audio.currentTime = 0;
+
+        audio.play();
+        key.classList.add("hit");
+
+        console.log(e.keyCode);
+      }
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return;
+        this.classList.remove("hit");
+      }
+      function removeEffect(e) {
+        this.classList.remove("hit");
+      }
+    </script>
+  </body>
+</html>
