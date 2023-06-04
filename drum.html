@@ -96,24 +96,24 @@
       .key-wrap {
         margin: 20px;
         display: block;
-        transition: all 150ms;
+        transition: all 200ms;
       }
 
       .wrap-hit {
         transform: translateY(-20px);
       }
 
-      .hit {
-        /* transform: scale(1.2); */
-        /* box-shadow: 0px 0px 56px 22px rgba(247, 247, 0, 1);
-        border: 4px solid white; */
-        /* translate: 20px;
-        transform: rotateX(45deg) rotateZ(45deg); */
-      }
+      /* .hit {
+        transform: scale(1.2); 
+      box-shadow: 0px 0px 56px 22px rgba(247, 247, 0, 1);
+        border: 4px solid white;
+     translate: 20px;
+        transform: rotateX(45deg) rotateZ(45deg);
+      } */
 
       .key-back.hit-back {
         box-shadow: 0px 0px 56px 22px rgba(247, 247, 0, 1);
-        /* border: 4px solid white; */
+        border: 2px solid white;
       }
 
       .sound {
@@ -128,10 +128,7 @@
         left: 0; */
         width: 50px;
         height: 50px;
-        /* -webkit-transform: translateZ(-29px);
-        -moz-transform: translateZ(-29px);
-        -ms-transform: translateZ(-29px);
-        -o-transform: translateZ(-29px); */
+
         transform: translateZ(-29px);
 
         box-shadow: 10px 10px 50px 0px #111;
@@ -248,25 +245,28 @@
         audio.currentTime = 0;
 
         audio.play();
-        key.classList.toggle("hit");
         keyWrap.classList.toggle("wrap-hit");
         keyBack.classList.toggle("hit-back");
-
-        // key.classList.toggle("hit");
-        // keyWrap.classList.toggle("wrap-hit");
-        // keyBack.classList.toggle("hit-back");
 
         console.log(e.keyCode);
       }
 
-      function mouseActive(A) {
-        console.log("마우스액티브");
-
-        this.classList.toggle("wrap-hit");
+      function mouseOver() {
+        const back = this.lastElementChild.lastElementChild;
+        this.removeEventListener("transitionend", removeTransition);
+        back.removeEventListener("transitionend", removeTransition);
+        this.classList.add("wrap-hit");
+        back.classList.add("hit-back");
+      }
+      function mouseOut() {
+        const back = this.lastElementChild.lastElementChild;
+        this.addEventListener("transitionend", removeTransition);
+        back.addEventListener("transitionend", removeTransition);
+        this.classList.remove("wrap-hit");
+        back.classList.remove("hit-back");
       }
 
       //해당 동작이 끝나면 돌아가는 함수
-
       function listenTransition(a) {
         a.forEach((b) => {
           b.addEventListener("transitionend", removeTransition);
@@ -274,8 +274,8 @@
       }
       function listenMouse(m) {
         m.forEach((o) => {
-          o.addEventListener("mouseenter", mouseActive);
-          o.addEventListener("mouseleave", mouseActive);
+          o.addEventListener("mouseenter", mouseOver);
+          o.addEventListener("mouseleave", mouseOut);
         });
       }
 
@@ -290,10 +290,7 @@
       listenMouse(keyWrap);
 
       function removeTransition(e) {
-        // console.log(e);
         // if (e.propertyName !== "transform") return;
-
-        this.classList.remove("hit");
         this.classList.remove("wrap-hit");
         this.classList.remove("hit-back");
       }
