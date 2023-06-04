@@ -251,19 +251,50 @@
         console.log(e.keyCode);
       }
 
-      function mouseOver() {
-        const back = this.lastElementChild.lastElementChild;
-        this.removeEventListener("transitionend", removeTransition);
-        back.removeEventListener("transitionend", removeTransition);
-        this.classList.add("wrap-hit");
-        back.classList.add("hit-back");
-      }
-      function mouseOut() {
-        const back = this.lastElementChild.lastElementChild;
-        this.addEventListener("transitionend", removeTransition);
-        back.addEventListener("transitionend", removeTransition);
-        this.classList.remove("wrap-hit");
-        back.classList.remove("hit-back");
+      // function mouseOver() {
+      //   const back = this.lastElementChild.lastElementChild;
+      //   this.removeEventListener("transitionend", removeTransition);
+      //   back.removeEventListener("transitionend", removeTransition);
+      //   this.classList.add("wrap-hit");
+      //   back.classList.add("hit-back");
+      // }
+      // function mouseOut() {
+      //   const back = this.lastElementChild.lastElementChild;
+      //   this.addEventListener("transitionend", removeTransition);
+      //   back.addEventListener("transitionend", removeTransition);
+      //   this.classList.remove("wrap-hit");
+      //   back.classList.remove("hit-back");
+      // }
+
+      function mouseClick() {
+        console.log(parseInt(this.dataset.key));
+
+        const keyCode = parseInt(this.dataset.key);
+        const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+        const keyWrap = document.querySelector(
+          `.key-wrap[data-key="${keyCode}"]`
+        );
+        const keyBack = document.querySelector(
+          `.key[data-key='${keyCode}']>div`
+        );
+        if (!audio) return;
+        audio.currentTime = 0;
+
+        audio.play();
+        keyWrap.classList.toggle("wrap-hit");
+        keyBack.classList.toggle("hit-back");
+
+        console.log(keyCode);
+
+        // console.log(a.getArrtibute("class"));
+        //this.getAttribute안됨.
+
+        // const back = this.lastElementChild.lastElementChild;
+        // this.removeEventListener("transitionend", removeTransition);
+        // back.removeEventListener("transitionend", removeTransition);
+        // this.classList.add("wrap-hit");
+        // back.classList.add("hit-back");
       }
 
       //해당 동작이 끝나면 돌아가는 함수
@@ -274,8 +305,9 @@
       }
       function listenMouse(m) {
         m.forEach((o) => {
-          o.addEventListener("mouseenter", mouseOver);
-          o.addEventListener("mouseleave", mouseOut);
+          // o.addEventListener("mouseenter", mouseOver);
+          // o.addEventListener("mouseleave", mouseOut);
+          o.addEventListener("click", mouseClick);
         });
       }
 
