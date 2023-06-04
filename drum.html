@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Javascript Project 30 응용</title>
     <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap");
     </style>
@@ -24,8 +25,55 @@
         background-image: url("https://cdn.pixabay.com/photo/2018/05/10/11/34/concert-3387324_1280.jpg");
         display: flex;
         flex-wrap: wrap;
-        justify-content: ;
         align-content: center;
+      }
+
+      .button-text {
+        position: fixed;
+        top: 10px;
+        right: 100px;
+        color: white;
+      }
+
+      .switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+        background-color: rgba(105, 105, 105, 0.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        transition: all 200ms;
+      }
+
+      input[type="checkbox"] {
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background-color: hsl(151, 68%, 47%);
+        border-radius: 50%;
+        transition: all 200ms;
+      }
+
+      .switch:active input[type="checkbox"] {
+        width: 34px;
+      }
+
+      .switch:active input[type="checkbox"]:checked {
+        width: 34px;
+        margin-left: -8px;
+      }
+
+      input[type="checkbox"]:focus {
+        outline: none;
+      }
+
+      input[type="checkbox"]:checked {
+        transform: translateX(30px);
+        background-color: hsl(0, 1%, 54%);
       }
 
       @media (min-width: 915px) {
@@ -128,6 +176,11 @@
 
   <body>
     <main class="wrapper">
+      <p class="button-text">SOUND</p>
+      <label class="switch" id="switch">
+        <input type="checkbox" onclick="mute(this)" />
+      </label>
+
       <div class="key-wrap" data-key="65">
         <div data-key="65" class="key">
           <span class="kbd">A</span>
@@ -220,6 +273,16 @@
     <script>
       window.addEventListener("keydown", playSound);
 
+      // const checkbox = document.getElementById("mute");
+      // checkbox.addEventListener("change", mute(checkbox));
+
+      let muted = false;
+      function mute(checkbox) {
+        muted = checkbox.checked;
+        // checkbox.checked? muted=true : muted=false;
+        console.log(muted);
+      }
+
       function playSound(e) {
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
@@ -232,7 +295,11 @@
         if (!audio) return;
         audio.currentTime = 0;
 
-        audio.play();
+        console.log(muted);
+
+        if (!muted) {
+          audio.play();
+        }
         keyWrap.classList.toggle("wrap-hit");
         keyBack.classList.toggle("hit-back");
 
@@ -256,7 +323,9 @@
         if (!audio) return;
         audio.currentTime = 0;
 
-        audio.play();
+        if (!muted) {
+          audio.play();
+        }
         keyWrap.classList.toggle("wrap-hit");
         keyBack.classList.toggle("hit-back");
 
