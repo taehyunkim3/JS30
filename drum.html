@@ -143,11 +143,8 @@
         audio.currentTime = 0;
 
         audio.play();
-        if (key.classList.contains("hit")) {
-          key.classList.remove("hit");
-        } else {
-          key.classList.add("hit");
-        }
+
+        key.classList.toggle("hit");
 
         console.log(e.keyCode);
       }
