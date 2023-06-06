@@ -273,13 +273,9 @@
     <script>
       window.addEventListener("keydown", playSound);
 
-      // const checkbox = document.getElementById("mute");
-      // checkbox.addEventListener("change", mute(checkbox));
-
       let muted = false;
       function mute(checkbox) {
         muted = checkbox.checked;
-        // checkbox.checked? muted=true : muted=false;
         console.log(muted);
       }
 
@@ -295,21 +291,14 @@
         if (!audio) return;
         audio.currentTime = 0;
 
-        console.log(muted);
-
         if (!muted) {
           audio.play();
         }
         keyWrap.classList.toggle("wrap-hit");
         keyBack.classList.toggle("hit-back");
-
-        // console.log(e.keyCode);
       }
 
       function mouseClick() {
-        // const keyCode = o.getAttribute("data-key");
-
-        console.log(this);
         const keyCode = parseInt(this.dataset.key);
 
         const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
@@ -328,8 +317,6 @@
         }
         keyWrap.classList.toggle("wrap-hit");
         keyBack.classList.toggle("hit-back");
-
-        // console.log(keyCode);
       }
 
       //해당 동작이 끝나면 돌아가는 함수
